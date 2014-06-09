@@ -28,10 +28,20 @@ The action method of the UIDatePicker will directly set the NSDate property of t
 
 In addition, this sample shows how to use NSDateFormatter class to achieve the custom cell's date-formatted appearance.
 
+
+===========================================================================
+New Features:
+//add method can be changed to set it's value for Webservice or from other ViewController
+-(NSArray*)generateDataForTable;
+===========================================================================
+
+
+
 ===========================================================================
 BUILD REQUIREMENTS:
 Xcode 5.0, iOS SDK 7.0
-
+//prepare your dataHere this method can be changed to set it's value for Webservice or from other ViewController
+-(NSArray*)generateDataForTable{
 ===========================================================================
 
 RUNTIME REQUIREMENTS: 
