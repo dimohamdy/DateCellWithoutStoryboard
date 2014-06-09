@@ -88,7 +88,9 @@ static NSString *kOtherCell = @"otherCell";     // the remaining cells at the en
 
 @end
 
-@implementation MoreTableViewController
+@implementation MoreTableViewController{
+    NSArray*dateItems;
+}
 
 - (UITableViewCell *) createCellWithIdetifier:(NSString *)cellId {
     NSArray *reusableUiComponents = [[NSBundle mainBundle] loadNibNamed:@"ReusableUIComponents" owner:self options:nil];
@@ -117,11 +119,16 @@ static NSString *kOtherCell = @"otherCell";     // the remaining cells at the en
 - (void)setupDataSource {
     // setup our data source
     NSMutableDictionary *itemOne = [@{ kTitleKey : @"Tap a cell to change its date:" } mutableCopy];
+    //Add dateItems
     NSMutableDictionary *itemTwo = [@{ kTitleKey : @"Start Date",
                                        kDateKey : [NSDate date] } mutableCopy];
     NSMutableDictionary *itemThree = [@{ kTitleKey : @"End Date",
                                          kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *itemFour = [@{ kTitleKey : @"(other item1)" } mutableCopy];
+    
+    NSMutableDictionary *itemFour = [@{ kTitleKey : @"born Date",
+                                        kDateKey : [NSDate date] } mutableCopy];
+    
+    
     NSMutableDictionary *itemFive = [@{ kTitleKey : @"(other item2)" } mutableCopy];
     self.dataArray = @[itemOne, itemTwo, itemThree, itemFour, itemFive];
     
@@ -137,7 +144,9 @@ static NSString *kOtherCell = @"otherCell";     // the remaining cells at the en
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //cell that have datepicker //hamdy
+    dateItems=@[@1,@2,@3];
+
     [self setupDataSource];
     
     self.title = @"DateCell";
@@ -232,18 +241,30 @@ NSUInteger UNUSED_DeviceSystemMajorVersion() // TODO - move this to Utils
  
  @param indexPath The indexPath to check if it represents start/end date cell.
  */
+//check for array that have index of  date Cell  //hamdy
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
 {
     BOOL hasDate = NO;
     
-    if ((indexPath.row == kDateStartRow) ||
-        (indexPath.row == kDateEndRow || ([self hasInlineDatePicker] && (indexPath.row == kDateEndRow + 1))))
+    
+    
+    //    if ((indexPath.row == kDateBornRow)||(indexPath.row == kDateStartRow) ||
+    //        (indexPath.row == kDateEndRow || ([self hasInlineDatePicker] && (indexPath.row == kDateEndRow + 1))))
+    //    {
+    //        hasDate = YES;
+    //    }
+    
+    for (int i = 0; i < [dateItems count]; i++)
     {
-        hasDate = YES;
+        if( indexPath.row == [[dateItems objectAtIndex:i] intValue])
+            hasDate = YES;
+        
     }
+    
     
     return hasDate;
 }
+
 
 #pragma mark - Table view data source
 
