@@ -115,8 +115,8 @@ static NSString *kOtherCell = @"otherCell";     // the remaining cells at the en
     }
     return self;
 }
-
-- (void)setupDataSource {
+//prepare your dataHere this method can be changed to set it's value for Webservice or from other ViewController
+-(NSArray*)generateDataForTable{
     // setup our data source
     NSMutableDictionary *itemOne = [@{ kTitleKey : @"Tap a cell to change its date:" } mutableCopy];
     //Add dateItems
@@ -130,8 +130,12 @@ static NSString *kOtherCell = @"otherCell";     // the remaining cells at the en
     
     
     NSMutableDictionary *itemFive = [@{ kTitleKey : @"(other item2)" } mutableCopy];
-    self.dataArray = @[itemOne, itemTwo, itemThree, itemFour, itemFive];
     
+
+    return @[itemOne, itemTwo, itemThree, itemFour, itemFive];
+}
+- (void)setupDataSource {
+    self.dataArray=[self generateDataForTable];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
     [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
